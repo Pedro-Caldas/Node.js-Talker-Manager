@@ -4,7 +4,16 @@ const bodyParser = require('body-parser');
 // const res = require('express/lib/response');
 const fs = require('fs').promises;
 const generateToken = require('./services');
-const { validateEmail, validatePassword } = require('./middlewares');
+const {
+  validateEmail,
+  validatePassword,
+  validateToken,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateWatchedAt,
+  validateRate,
+} = require('./middlewares');
 
 const app = express();
 app.use(bodyParser.json());
@@ -44,4 +53,25 @@ app.post('/login', validateEmail, validatePassword, (_req, res) => {
 
   const token = generateToken();
   res.status(200).json({ token });
+});
+
+// 5
+app.post('/talker',
+validateToken,
+validateName,
+validateAge,
+validateTalk,
+validateWatchedAt,
+validateRate,
+async (req, res) => {
+  const data = JSON.parse(await fs.readFile('talker.json', 'utf-8'));
+  const id = data.length + 1;
+  const { name, age, talk } = req.body;
+  const { watchedAt, rate } = talk;
+  
+  const newTalker = { id, name, age, talk: { watchedAt, rate } };
+  data.push(newTalker);
+  await fs.writeFile('talker.json', JSON.stringify(data));
+  
+  res.status(201).json(newTalker);
 });
