@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 // const req = require('express/lib/request');
 // const res = require('express/lib/response');
 const fs = require('fs').promises;
+const generateToken = require('./services');
+const { validateEmail, validatePassword } = require('./middlewares');
 
 const app = express();
 app.use(bodyParser.json());
@@ -35,4 +37,11 @@ app.get('/talker/:id', async (req, res) => {
   if (!talker) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   
   res.status(HTTP_OK_STATUS).json(talker);
+});
+
+// 3 and 4
+app.post('/login', validateEmail, validatePassword, (_req, res) => {
+
+  const token = generateToken();
+  res.status(200).json({ token });
 });
