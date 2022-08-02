@@ -50,7 +50,6 @@ app.get('/talker/:id', async (req, res) => {
 
 // 3 and 4
 app.post('/login', validateEmail, validatePassword, (_req, res) => {
-
   const token = generateToken();
   res.status(200).json({ token });
 });
