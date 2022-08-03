@@ -74,3 +74,19 @@ async (req, res) => {
   
   res.status(201).json(newTalker);
 });
+
+// 7
+app.delete('/talker/:id', validateToken, async (req, res) => {
+  const { id } = req.params;
+  const data = JSON.parse(await fs.readFile('talker.json', 'utf-8'));
+  const talkerIndex = data.findIndex((el) => el.id === Number(id));
+
+  if (!talkerIndex) return res.status(404).json({ message: 'Palestrante não encontrado' });
+
+  data.splice(talkerIndex, 1);
+
+  const newData = data.filter((el) => el.id !== Number(id));
+  await fs.writeFile('talker.json', JSON.stringify(newData));
+
+  res.status(204).end();
+});
