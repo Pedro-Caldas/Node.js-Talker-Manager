@@ -89,6 +89,33 @@ async (req, res) => {
   res.status(201).json(newTalker);
 });
 
+// 6
+app.put('/talker/:id',
+validateToken,
+validateName,
+validateAge,
+validateTalk,
+validateWatchedAt,
+validateRate,
+async (req, res) => {
+  const { id } = req.params;
+  const { name, age, talk } = req.body;
+  const { watchedAt, rate } = talk;
+  const data = JSON.parse(await fs.readFile(dataBase, 'utf-8'));
+
+  const talkerIndex = data.findIndex((el) => el.id === Number(id));
+  if (!talkerIndex) return res.status(404).json({ message: 'Palestrante não encontrado' });
+
+  const numId = Number(id);
+
+  data[talkerIndex] = { id: numId, name, age, talk: { watchedAt, rate } };
+  await fs.writeFile(dataBase, JSON.stringify(data));
+
+  const newTalker = { id: numId, name, age, talk: { watchedAt, rate } };
+
+  res.status(HTTP_OK_STATUS).json(newTalker);
+});
+
 // 7
 app.delete('/talker/:id', validateToken, async (req, res) => {
   const { id } = req.params;
