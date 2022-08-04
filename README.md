@@ -1,16 +1,18 @@
-# 🚧 README em construção 🚧
+# Talker-Manager (Node.js)
 
-<!-- Olá, Tryber!
+## Introduction
+In this project, we were asked to develop a **CRUD** (Create, Read, Update, Delete) API for managing speakers for an event using Node.js and Express.js. This work aimed to develop our skills in creating different **endpoints** and **middlewares**.
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
+## Main used technologies:
+Node.js
 
-É essencial que você preencha esse documento por conta própria, ok?
+Express.js
 
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
+## Instructions to utilize the application
+After cloning the repository, you need to install the necessary dependencies with the `npm install` command and start the project with the `node index.js` command. After that, you can make requests using an HTTP client (Insomnia, Postman, HTTPie, etc.).
 
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
+## Commit history
+You can check the entire commit history to see how the project developed step by step. All commits were based on the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) guide, keeping an organization and accurate description of what was done with each change.
 
--->
+## Contact
+You can get in touch with me at pedronerislc@gmail.com or by <a href="https://www.linkedin.com/in/pedro-nl-caldas/">Linkedin</a>.
